@@ -4,7 +4,7 @@
 
 For building and running the application you need:
 
-- [JDK 11](https://www.oracle.com/co/java/technologies/javase/jdk11-archive-downloads.html)
+- [JDK 17](https://www.oracle.com/co/java/technologies/javase/jdk17-archive-downloads.html)
 - [Maven 3](https://maven.apache.org)
 - PostgreSQL
 
