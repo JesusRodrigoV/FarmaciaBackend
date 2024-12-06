@@ -1,46 +1,56 @@
 package com.farmacia.gestion.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "detalle_venta")
 public class DetalleVenta {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_detalle")
-    private int id;
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "id_venta", nullable = false)
+    @JsonBackReference
     private Venta venta;
+
     @ManyToOne
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
+
     @Column(nullable = false)
     private int cantidad;
-    @Column(nullable = false)
-    private double precio;
 
-    public DetalleVenta(Venta venta, Producto producto, int cantidad, double precio) {
-        super();
+    @Column(nullable = false)
+    private double precioUnitario;
+
+    public DetalleVenta() {
+    }
+
+    public DetalleVenta(Venta venta, Producto producto, int cantidad) {
         this.venta = venta;
         this.producto = producto;
         this.cantidad = cantidad;
-        this.precio = precio;
+        this.precioUnitario = producto.getPrecio();
     }
 
-    public DetalleVenta() {
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecio(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     public void setProducto(Producto producto) {
@@ -55,12 +65,12 @@ public class DetalleVenta {
         return cantidad;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
     public double getPrecio() {
-        return precio;
+        return precioUnitario;
     }
 
     public Producto getProducto() {
@@ -69,5 +79,9 @@ public class DetalleVenta {
 
     public Venta getVenta() {
         return venta;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
     }
 }

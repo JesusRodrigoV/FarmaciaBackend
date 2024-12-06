@@ -1,6 +1,9 @@
 package com.farmacia.gestion.model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,14 +18,16 @@ public class Proveedor {
     private String nombre;
     @Column(nullable = false)
     private String contacto;
+/*
     @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Producto> productos;
-
+ */
     public Proveedor(String nombre, String contacto, List<Producto> productos) {
         super();
         this.nombre = nombre;
         this.contacto = contacto;
-        this.productos = productos;
+        //this.productos = productos;
     }
 
     public Proveedor() {
@@ -39,11 +44,11 @@ public class Proveedor {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+/*
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
-
+ */
     public String getContacto() {
         return contacto;
     }
@@ -55,8 +60,9 @@ public class Proveedor {
     public String getNombre() {
         return nombre;
     }
-
+/*
     public List<Producto> getProductos() {
         return productos;
     }
+         */
 }

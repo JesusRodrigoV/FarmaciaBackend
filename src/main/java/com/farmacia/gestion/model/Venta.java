@@ -1,7 +1,10 @@
 package com.farmacia.gestion.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,53 +13,62 @@ public class Venta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_venta")
-	private int id;
+	private Long id;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "fecha_venta")
-	private Date fecha;
-	@Column(nullable = false)
-	private String cliente;
+	@Column(name = "fecha_venta", nullable = false)
+	private LocalDate fecha = LocalDate.now();
+
+	@ManyToOne
+	@JoinColumn(name = "id_cliente", nullable = false)
+	private Cliente cliente;
+
 	@Column(nullable = false)
 	private String metodoPago;
+
 	@Column(nullable = false)
 	private double total;
-	@OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<DetalleVenta> detalles;
 
-	public Venta(Date fecha, String cliente, String metodoPago, double total, List<DetalleVenta> detalles) {
-		super();
-		this.fecha = fecha;
+	public Venta(Cliente cliente, String metodoPago, List<DetalleVenta> detalles) {
 		this.cliente = cliente;
 		this.metodoPago = metodoPago;
-		this.total = total;
 		this.detalles = detalles;
+		calcularTotal();
 	}
 
 	public Venta() {
 	}
 
-	public int getId() {
+	public void calcularTotal() {
+		this.total = detalles.stream()
+				.mapToDouble(d -> d.getCantidad() * d.getPrecioUnitario())
+				.sum();
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
-	public String getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(String cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
