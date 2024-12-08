@@ -1,105 +1,101 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" 
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
-              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
-              name="inventory_report" pageWidth="595" pageHeight="842" 
-              columnWidth="555" leftMargin="20" rightMargin="20" 
-              topMargin="20" bottomMargin="20" uuid="123e4567-e89b-12d3-a456-426614174000">
-
-    <field name="id" class="java.lang.Long"/>
-    <field name="nombre" class="java.lang.String"/>
-    <field name="descripcion" class="java.lang.String"/>
-    <field name="categoria" class="java.lang.String"/>
-    <field name="laboratorio" class="java.lang.String"/>
-    <field name="stock" class="java.lang.Integer"/>
-    <field name="precio" class="java.lang.Double"/>
-    <field name="fechaVencimiento" class="java.sql.Date"/>
-
-    <title>
-        <band height="50">
-            <staticText>
-                <reportElement x="0" y="0" width="200" height="30"/>
-                <textElement>
-                    <font size="18"/>
-                </textElement>
-                <text><![CDATA[Inventory Report]]></text>
-            </staticText>
-        </band>
-    </title>
-
-    <columnHeader>
-        <band height="30">
-            <staticText>
-                <reportElement x="0" y="0" width="40" height="20"/>
-                <text><![CDATA[ID]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="40" y="0" width="100" height="20"/>
-                <text><![CDATA[Nombre]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="140" y="0" width="100" height="20"/>
-                <text><![CDATA[Descripción]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="240" y="0" width="80" height="20"/>
-                <text><![CDATA[Categoría]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="320" y="0" width="100" height="20"/>
-                <text><![CDATA[Laboratorio]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="420" y="0" width="50" height="20"/>
-                <text><![CDATA[Stock]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="470" y="0" width="50" height="20"/>
-                <text><![CDATA[Precio]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="520" y="0" width="100" height="20"/>
-                <text><![CDATA[Fecha Venc.]]></text>
-            </staticText>
-        </band>
-    </columnHeader>
-
-    <detail>
-        <band height="30">
-            <textField>
-                <reportElement x="0" y="0" width="40" height="20"/>
-                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="40" y="0" width="100" height="20"/>
-                <textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="140" y="0" width="100" height="20"/>
-                <textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="240" y="0" width="80" height="20"/>
-                <textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="320" y="0" width="100" height="20"/>
-                <textFieldExpression><![CDATA[$F{laboratorio}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="420" y="0" width="50" height="20"/>
-                <textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="470" y="0" width="50" height="20"/>
-                <textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="520" y="0" width="100" height="20"/>
-                <textFieldExpression><![CDATA[$F{fechaVencimiento}]]></textFieldExpression>
-            </textField>
-        </band>
-    </detail>
-
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="inventory_report" language="java" columnCount="1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="123e4567-e89b-12d3-a456-426614174000">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="laboratorio" class="java.lang.String"/>
+	<field name="stock" class="java.lang.Integer"/>
+	<field name="precio" class="java.lang.Double"/>
+	<field name="fechaVencimiento" class="java.sql.Date"/>
+	<title height="136">
+		<element kind="staticText" uuid="9d101108-d921-492f-9322-c6523ea5458c" x="280" y="90" width="200" height="30" fontSize="18.0" hTextAlign="Center">
+			<text><![CDATA[Reporte de Inventario]]></text>
+		</element>
+		<element kind="staticText" uuid="7946dfde-d598-4d6b-a425-48ddbfbc3794" x="100" y="0" width="140" height="20" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Farmacia ]]></text>
+		</element>
+		<element kind="staticText" uuid="4ab8a3d9-8a14-4dd5-a86c-8e2e0a2f25e2" x="100" y="20" width="140" height="20" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Direccion: ]]></text>
+		</element>
+		<element kind="staticText" uuid="4858098b-d2ce-4145-991f-8181283d7fdb" x="100" y="40" width="140" height="20" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Correo Electrónico: ]]></text>
+		</element>
+		<element kind="textField" uuid="33cf7bc7-ddbd-47d2-9fd8-d2cc36cc17b2" x="670" y="0" width="130" height="30" pattern="MMMMM dd, yyyy" vTextAlign="Middle">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="staticText" uuid="481ba61d-432a-4789-8cc5-62ab8f48777a" x="520" y="0" width="140" height="30" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Fecha y hora de creacion:]]></text>
+		</element>
+		<element kind="image" uuid="bcf0951e-9740-47e0-a361-55f6611ea95e" x="0" y="0" width="80" height="70">
+			<expression><![CDATA[""]]></expression>
+		</element>
+		<element kind="line" uuid="95008f3c-438d-4697-a29c-3099d8106eda" x="0" y="82" width="780" height="1">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+		</element>
+	</title>
+	<columnHeader height="30">
+		<element kind="staticText" uuid="f5a8d9cc-67da-451c-8962-7512b3de9c9c" x="0" y="0" width="40" height="20">
+			<text><![CDATA[ID]]></text>
+		</element>
+		<element kind="staticText" uuid="6a90f728-995e-454a-b213-fa00563368c9" x="40" y="0" width="100" height="20">
+			<text><![CDATA[Nombre]]></text>
+		</element>
+		<element kind="staticText" uuid="58fe00e5-25e0-4933-a790-eab4b5826551" x="140" y="0" width="100" height="20">
+			<text><![CDATA[Descripción]]></text>
+		</element>
+		<element kind="staticText" uuid="4af3faf9-c7e2-4bd4-b82f-e41fc940396d" x="240" y="0" width="80" height="20">
+			<text><![CDATA[Categoría]]></text>
+		</element>
+		<element kind="staticText" uuid="3dfa2487-7a6c-4725-bc27-8ce8914b94d5" x="320" y="0" width="100" height="20">
+			<text><![CDATA[Laboratorio]]></text>
+		</element>
+		<element kind="staticText" uuid="8d0d20c5-e2be-47fd-af22-7d4647843dd9" x="420" y="0" width="50" height="20">
+			<text><![CDATA[Stock]]></text>
+		</element>
+		<element kind="staticText" uuid="7b34926d-fcf6-4cc6-8eb0-140020a15a36" x="470" y="0" width="50" height="20">
+			<text><![CDATA[Precio]]></text>
+		</element>
+		<element kind="staticText" uuid="542a7392-e83c-41fc-a9c3-66c3fe344b7a" x="520" y="0" width="100" height="20">
+			<text><![CDATA[Fecha Venc.]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="30">
+			<element kind="textField" uuid="5734026a-f3c8-4192-a7fb-3b50977f5616" x="0" y="0" width="40" height="20">
+				<expression><![CDATA[$F{id}]]></expression>
+			</element>
+			<element kind="textField" uuid="8c2c9d15-1983-4725-ae2c-15026ed4d5d0" x="40" y="0" width="100" height="20">
+				<expression><![CDATA[$F{nombre}]]></expression>
+			</element>
+			<element kind="textField" uuid="b23a91ab-d0d1-4ddc-88a0-66299d79f4a7" x="140" y="0" width="100" height="20">
+				<expression><![CDATA[$F{descripcion}]]></expression>
+			</element>
+			<element kind="textField" uuid="0bb36a7a-8e02-4ef1-b23d-5fceacf8c34e" x="240" y="0" width="80" height="20">
+				<expression><![CDATA[$F{categoria}]]></expression>
+			</element>
+			<element kind="textField" uuid="cddd10aa-6580-4dbb-a420-b0e771722163" x="320" y="0" width="100" height="20">
+				<expression><![CDATA[$F{laboratorio}]]></expression>
+			</element>
+			<element kind="textField" uuid="4b2d0f6b-33c1-4eee-bc3d-bc1133a93bd8" x="420" y="0" width="50" height="20">
+				<expression><![CDATA[$F{stock}]]></expression>
+			</element>
+			<element kind="textField" uuid="3bcce121-bfde-4428-b030-b27f6535fb79" x="470" y="0" width="50" height="20">
+				<expression><![CDATA[$F{precio}]]></expression>
+			</element>
+			<element kind="textField" uuid="3c1b6f9d-4916-463d-b921-836930b0e1aa" x="520" y="0" width="100" height="20">
+				<expression><![CDATA[$F{fechaVencimiento}]]></expression>
+			</element>
+		</band>
+	</detail>
 </jasperReport>

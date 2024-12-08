@@ -20,8 +20,6 @@ import org.springframework.http.MediaType;
 
 import com.farmacia.gestion.service.ProductoService;
 
-import net.sf.jasperreports.engine.JRException;
-
 import com.farmacia.gestion.model.Producto;
 
 @RestController

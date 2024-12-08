@@ -33,6 +33,24 @@ public class VentaREST {
     public List<Venta> buscarVentas(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
         return ventaService.buscarVentasPorFecha(startDate, endDate);
     }
+
+    @GetMapping("/dia")
+    public ResponseEntity<List<Venta>> obtenerPorDia(@RequestParam("fecha") String fecha) {
+        LocalDate fechaConvertida = LocalDate.parse(fecha);
+        return ResponseEntity.ok(ventaService.obtenerPorDia(fechaConvertida));
+    }
+
+    @GetMapping("/mes")
+    public ResponseEntity<List<Venta>> obtenerPorMesYAño(
+            @RequestParam("year") int year, 
+            @RequestParam("month") int month) {
+        return ResponseEntity.ok(ventaService.obtenerPorMesYAño(year, month));
+    }
+
+    @GetMapping("/año")
+    public ResponseEntity<List<Venta>> obtenerPorAño(@RequestParam("year") int year) {
+        return ResponseEntity.ok(ventaService.obtenerPorAño(year));
+    }
     
     @PostMapping
     public ResponseEntity<Venta> registrarVenta(@RequestBody Venta venta) {

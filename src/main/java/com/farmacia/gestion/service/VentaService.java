@@ -42,6 +42,18 @@ public class VentaService {
         return ventaRepository.findAll();
     }
 
+    public List<Venta> obtenerPorDia(LocalDate fecha) {
+        return ventaRepository.findByFecha(fecha);
+    }
+
+    public List<Venta> obtenerPorMesYAño(int year, int month) {
+        return ventaRepository.findByMesYAño(year, month);
+    }
+
+    public List<Venta> obtenerPorAño(int year) {
+        return ventaRepository.findByAño(year);
+    }
+
     public void deleteByIdVentas(Long id) {
         ventaRepository.deleteById(id);
     }
