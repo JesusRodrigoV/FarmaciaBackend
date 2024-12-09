@@ -1,28 +1,42 @@
 # PersonaBACKEND
-
-## Requirements
-
-For building and running the application you need:
-
-- [JDK 17](https://www.oracle.com/co/java/technologies/javase/jdk17-archive-downloads.html)
+### Axl y Andrei 
+Requieren:
 - [Maven 3](https://maven.apache.org)
 - PostgreSQL
-
-You will need to setup your own database or create a database with the following configuration
+Iniciar y hacer correr la clase :
 ```
-spring.datasource.url=jdbc:postgresql://localhost:5432/persona-db
-spring.datasource.username=postgres
-spring.datasource.password=admin
+src\main\java\com\farmacia\gestion\BackendApplication.java
 ```
-## Running the application locally
-
-There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `xyz.yoandroide.persona.PersonaBackendApplication` class from your IDE.
-
-Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
-
+o tambien:
 ```shell
 mvn spring-boot:run
 ```
+Si todo salio correcto, en siguiente archivo :
+```
+src\main\resources\application.properties
+```
+Comentar las ultimas tres lineas del archivo
+```
+#spring.jpa.generate-ddl=true
+#spring.jpa.hibernate.ddl-auto=create-drop
+#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+```
+En postgre y en la base de datos creada farmacia-db ejecutar el archivo datos.sql
+```
+datos.sql
+```
+Todo sale correcto y pueden ver datos en el frontend
+
+Frontend se ejecuta con un simple
+```
+npm install
+```
+```
+ng serve
+```
+
+Y listo falta diseño y eso 
+Pero por ahora buenas noches
 
 ### Running port
 - default spring boot config
@@ -31,7 +45,3 @@ mvn spring-boot:run
 ### Swagger url
 - default swagger url
   http://localhost:8080/swagger-ui/
-
-## About this project
-You can download the front-end project [personafront](https://github.com/guerreroeileen/personafront) or get more information in Yo Androide [Curso completo de SPRING BOOT CRUD + JPA + POSTGRESQL +REST + Angular
-](https://yoandroide.xyz/curso-completo-de-spring-boot-crud-jpa-postgresql-rest-angular/)
