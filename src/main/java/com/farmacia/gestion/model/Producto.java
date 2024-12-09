@@ -187,12 +187,15 @@ public class Producto {
     @Column(nullable = false)
     private Integer puntoReorden;
     @Column(nullable = false)
-    private Integer eoq; // Cantidad económica de pedido
+    private Integer eoq; 
+    @Column(nullable = false)
+    private double tiempoEntrega; 
+    @Column(nullable = false)
+    private double stockSeguridad;
 
     public Producto(String nombre, String descripcion, Integer stock, Date fechaVencimiento, Double precio,
             String categoria, String laboratorio, String numeroLote, Date fechaFabricacion, String formaFarmaceutica,
-            String cantidadPresentacion) {
-        super();
+            String cantidadPresentacion, double tiempoEntrega, double stockSeguridad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.stock = stock;
@@ -203,6 +206,8 @@ public class Producto {
         this.numeroLote = numeroLote;
         this.fechaFabricacion = fechaFabricacion;
         this.formaFarmaceutica = formaFarmaceutica;
+        this.tiempoEntrega = tiempoEntrega;
+        this.stockSeguridad = stockSeguridad;
         // this.cantidadPresentacion = cantidadPresentacion;
     }
 
@@ -257,6 +262,18 @@ public class Producto {
 
     public void setPuntoReorden(Integer puntoReorden) {
         this.puntoReorden = puntoReorden;
+    }
+    public void setStockSeguridad(double stockSeguridad) {
+        this.stockSeguridad = stockSeguridad;
+    }
+    public void setTiempoEntrega(double tiempoEntrega) {
+        this.tiempoEntrega = tiempoEntrega;
+    }
+    public double getStockSeguridad() {
+        return stockSeguridad;
+    }
+    public double getTiempoEntrega() {
+        return tiempoEntrega;
     }
 
     public Integer getEoq() {

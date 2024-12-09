@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.farmacia.gestion.model.DetalleVenta;
-
+import com.farmacia.gestion.model.HistorialVenta;
+import com.farmacia.gestion.model.Producto;
 import com.farmacia.gestion.model.Venta;
 import com.farmacia.gestion.repository.DetalleVentaRepository;
+import com.farmacia.gestion.repository.HistorialVentaRepository;
+import com.farmacia.gestion.repository.ProductoRepository;
 import com.farmacia.gestion.repository.VentaRepository;
 
 
@@ -18,6 +21,10 @@ import com.farmacia.gestion.repository.VentaRepository;
 public class VentaService {
     @Autowired
     private VentaRepository ventaRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
+    @Autowired
+    private HistorialVentaRepository historialVentaRepository;
     
     @Autowired
     private DetalleVentaRepository detalleVentaRepository;
@@ -64,10 +71,33 @@ public class VentaService {
 
     public Venta registrarVenta(Venta venta) {
         venta.calcularTotal();
+        List<DetalleVenta> detalles = venta.getDetalles();
+        for (DetalleVenta detalle : detalles){
+            Producto producto = detalle.producto;
+            if (detalle.producto.getStock() <= detalle.producto.getPuntoReorden()) {
+                calcularPuntoReorden(producto, producto.getTiempoEntrega(), producto.getStockSeguridad());
+            }
+        }
+        
+        
         return ventaRepository.save(venta);
     }
 
     public List<Venta> buscarVentasPorFecha(LocalDate startDate, LocalDate endDate) {
         return ventaRepository.findByFechaBetween(startDate, endDate);
+    }
+
+    private void calcularPuntoReorden(Producto producto, double tiempoEntrega, double stockSeguridad) {
+        double demandaDiaria = obtenerDemandaAnualReal(producto.getId()) / 365;
+        int puntoReorden = (int) Math.ceil((demandaDiaria * tiempoEntrega) + stockSeguridad);
+        producto.setPuntoReorden(puntoReorden);
+    }
+
+    private double obtenerDemandaAnualReal(Long productoId) {
+        List<HistorialVenta> ventas = historialVentaRepository.findByProductoIdAndFechaVentaBetween(
+                productoId,
+                LocalDate.now().minusMonths(12),
+                LocalDate.now());
+        return ventas.stream().mapToDouble(HistorialVenta::getCantidadVendida).sum();
     }
 }
