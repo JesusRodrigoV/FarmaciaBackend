@@ -18,6 +18,50 @@ AFTER INSERT ON detalle_venta
 FOR EACH ROW
 EXECUTE FUNCTION after_insert_venta();
 
+
+CREATE SEQUENCE IF NOT EXISTS cliente_id_seq;
+CREATE SEQUENCE IF NOT EXISTS laboratorio_id_seq;
+CREATE SEQUENCE IF NOT EXISTS categoria_id_seq;
+CREATE SEQUENCE IF NOT EXISTS producto_id_producto_seq;
+CREATE SEQUENCE IF NOT EXISTS venta_id_venta_seq;
+CREATE SEQUENCE IF NOT EXISTS detalle_venta_id_detalle_seq;
+
+INSERT INTO cliente (id_cliente, nombre, direccion, telefono, email)
+	VALUES
+    (1, 'Axl Severich', 'Av. Secundaria 123, La Paz', '45645643', 'axl.severich@example.com');
+INSERT INTO laboratorio (id, nombre, ubicacion)
+	VALUES (1, 'Laboratorio ABC', 'Ubicación XYZ');
+INSERT INTO categoria (id, nombre)
+	VALUES (1, 'Categoría Medicamentos');
+INSERT INTO producto (
+    id_producto, nombre, descripcion, categoria, laboratorio, stock, precio, 
+    fecha_vencimiento, numero_lote, fecha_fabricacion, forma_farmaceutica, 
+    punto_reorden, eoq, tiempo_entrega, stock_seguridad
+) 
+	VALUES (
+    1, 'Paracetamol', 'Descripción del producto', 1, 1, 100, 50.00, 
+    '2025-12-31', 'Lote001', '2023-01-01', 'Tableta', 
+    50, 200, 3, 5
+);
+INSERT INTO venta (id_venta, fecha_venta, id_cliente, metodo_pago, total)
+	VALUES (1, '2023-12-09', 1, 'Tarjeta', 150.00);
+INSERT INTO detalle_venta (id_detalle, cantidad, precio_unitario, id_producto, id_venta)
+	VALUES (1, 2, 15.00, 1, 1);
+	
+ALTER TABLE cliente ALTER COLUMN id_cliente SET DEFAULT nextval('cliente_id_seq');
+ALTER TABLE laboratorio ALTER COLUMN id SET DEFAULT nextval('laboratorio_id_seq');
+ALTER TABLE categoria ALTER COLUMN id SET DEFAULT nextval('categoria_id_seq');
+ALTER TABLE producto ALTER COLUMN id_producto SET DEFAULT nextval('producto_id_producto_seq');
+ALTER TABLE venta ALTER COLUMN id_venta SET DEFAULT nextval('venta_id_venta_seq');
+ALTER TABLE detalle_venta ALTER COLUMN id_detalle SET DEFAULT nextval('detalle_venta_id_detalle_seq');
+
+SELECT setval('detalle_venta_id_detalle_seq', (SELECT MAX(id_detalle) FROM public.detalle_venta));
+SELECT setval('producto_id_producto_seq', (SELECT MAX(id_producto) FROM public.producto));
+SELECT setval('cliente_id_cliente_seq', (SELECT MAX(id_cliente) FROM public.cliente));
+SELECT setval('categoria_id_seq', (SELECT MAX(id) FROM public.categoria));
+SELECT setval('laboratorio_id_seq', (SELECT MAX(id) FROM public.laboratorio));
+SELECT setval('venta_id_venta_seq', (SELECT MAX(id_venta) FROM public.venta));
+
 INSERT INTO cliente (id_cliente, nombre, direccion, telefono, email)
 VALUES
     (nextval('cliente_id_seq'), 'Diego Huayta', 'Av. Principal 123, La Paz', '123456789', 'diego.huayta@example.com'),
@@ -95,75 +139,65 @@ VALUES
     (nextval('producto_id_producto_seq'),'Vitamina D3 400 UI', 'Vitaminas y Minerales', 'Suplementos', 'Laboratorio W', 120, 1.10, '2026-05-31', 'LOTE291', '2024-08-01', 'Gotas', 25, 60, 7, 5),
     (nextval('producto_id_producto_seq'),'Magnesio 250mg', 'Vitaminas y Minerales', 'Suplementos', 'Laboratorio X', 80, 1.40, '2026-04-28', 'LOTE301', '2024-07-20', 'Tabletas masticables', 25, 60, 7, 5);
 
-
-INSERT INTO venta (id_venta, fecha_venta, id_cliente, metodoPago, total)
+INSERT INTO venta (id_venta, fecha_venta, id_cliente, metodo_pago, total) 
 VALUES
-    (nextval('venta_id_seq'), '2023-01-15', 1, 'Transferencia', 150.00),
-    (nextval('venta_id_seq'), '2023-02-10', 2, 'Efectivo', 180.00),
-    (nextval('venta_id_seq'), '2023-03-22', 3, 'Tarjeta', 210.00),
-    (nextval('venta_id_seq'), '2023-04-17', 4, 'Transferencia', 250.00),
+	(nextval('venta_id_venta_seq'), '2023-01-15', 1, 'Transferencia', 150.00),
+	(nextval('venta_id_venta_seq'), '2023-02-10', 2, 'Efectivo', 180.00),
+	(nextval('venta_id_venta_seq'), '2023-03-22', 3, 'Tarjeta', 210.00),
+	(nextval('venta_id_venta_seq'), '2023-04-17', 4, 'Transferencia', 250.00),
+	(nextval('venta_id_venta_seq'), '2024-01-05', 1, 'Efectivo', 300.00),
+	(nextval('venta_id_venta_seq'), '2024-02-15', 2, 'Tarjeta', 230.00),
+	(nextval('venta_id_venta_seq'), '2024-03-08', 3, 'Transferencia', 190.00),
+	(nextval('venta_id_venta_seq'), '2024-04-20', 4, 'Efectivo', 350.00),
+	(nextval('venta_id_venta_seq'), '2024-05-02', 1, 'Tarjeta', 400.00),
+	(nextval('venta_id_venta_seq'), '2024-06-10', 2, 'Transferencia', 280.00),
+	(nextval('venta_id_venta_seq'), '2024-07-13', 3, 'Efectivo', 250.00),
+	(nextval('venta_id_venta_seq'), '2024-08-25', 4, 'Tarjeta', 310.00),
+	(nextval('venta_id_venta_seq'), '2024-09-15', 1, 'Transferencia', 420.00),
+	(nextval('venta_id_venta_seq'), '2024-10-22', 2, 'Efectivo', 230.00),
+	(nextval('venta_id_venta_seq'), '2024-11-05', 3, 'Tarjeta', 350.00),
+	(nextval('venta_id_venta_seq'), '2024-12-01', 4, 'Transferencia', 380.00);
 
-    (nextval('venta_id_seq'), '2024-01-05', 1, 'Efectivo', 300.00),
-    (nextval('venta_id_seq'), '2024-02-15', 2, 'Tarjeta', 230.00),
-    (nextval('venta_id_seq'), '2024-03-08', 3, 'Transferencia', 190.00),
-    (nextval('venta_id_seq'), '2024-04-20', 4, 'Efectivo', 350.00),
-    (nextval('venta_id_seq'), '2024-05-02', 1, 'Tarjeta', 400.00),
-    (nextval('venta_id_seq'), '2024-06-10', 2, 'Transferencia', 280.00),
-    (nextval('venta_id_seq'), '2024-07-13', 3, 'Efectivo', 250.00),
-    (nextval('venta_id_seq'), '2024-08-25', 4, 'Tarjeta', 310.00),
-    (nextval('venta_id_seq'), '2024-09-15', 1, 'Transferencia', 420.00),
-    (nextval('venta_id_seq'), '2024-10-22', 2, 'Efectivo', 230.00),
-    (nextval('venta_id_seq'), '2024-11-05', 3, 'Tarjeta', 350.00),
-    (nextval('venta_id_seq'), '2024-12-01', 4, 'Transferencia', 380.00);
 
 INSERT INTO detalle_venta (id_detalle, cantidad, precio_unitario, id_producto, id_venta)
 VALUES
-    (nextval('detalle_venta_id_seq'), 3, 15.00, 2, 1),
-    (nextval('detalle_venta_id_seq'), 2, 20.50, 3, 1),
-    (nextval('detalle_venta_id_seq'), 4, 10.00, 4, 1),
-    (nextval('detalle_venta_id_seq'), 5, 30.00, 5, 1),
-
-    (nextval('detalle_venta_id_seq'), 3, 15.00, 6, 2),
-    (nextval('detalle_venta_id_seq'), 1, 25.00, 7, 2),
-    (nextval('detalle_venta_id_seq'), 2, 18.50, 8, 2),
-    (nextval('detalle_venta_id_seq'), 4, 22.50, 9, 2),
-
-    (nextval('detalle_venta_id_seq'), 3, 14.00, 10, 3),
-    (nextval('detalle_venta_id_seq'), 2, 20.00, 11, 3),
-    (nextval('detalle_venta_id_seq'), 1, 25.00, 12, 3),
-    (nextval('detalle_venta_id_seq'), 4, 18.50, 13, 3),
-
-    (nextval('detalle_venta_id_seq'), 5, 12.00, 14, 4),
-    (nextval('detalle_venta_id_seq'), 3, 28.00, 15, 4),
-    (nextval('detalle_venta_id_seq'), 2, 19.00, 16, 4),
-    (nextval('detalle_venta_id_seq'), 4, 30.00, 17, 4),
-
-    (nextval('detalle_venta_id_seq'), 2, 18.50, 18, 5),
-    (nextval('detalle_venta_id_seq'), 4, 25.00, 19, 5),
-    (nextval('detalle_venta_id_seq'), 1, 22.00, 20, 5),
-    (nextval('detalle_venta_id_seq'), 3, 15.00, 21, 5),
-
-    (nextval('detalle_venta_id_seq'), 2, 17.50, 22, 6),
-    (nextval('detalle_venta_id_seq'), 5, 12.50, 23, 6),
-    (nextval('detalle_venta_id_seq'), 3, 19.00, 24, 6),
-    (nextval('detalle_venta_id_seq'), 4, 14.00, 25, 6),
-
-    (nextval('detalle_venta_id_seq'), 2, 21.50, 2, 7),
-    (nextval('detalle_venta_id_seq'), 4, 30.00, 3, 7),
-    (nextval('detalle_venta_id_seq'), 1, 25.50, 4, 7),
-    (nextval('detalle_venta_id_seq'), 3, 18.00, 5, 7),
-
-    (nextval('detalle_venta_id_seq'), 3, 20.00, 6, 8),
-    (nextval('detalle_venta_id_seq'), 2, 28.00, 7, 8),
-    (nextval('detalle_venta_id_seq'), 4, 16.50, 8, 8),
-    (nextval('detalle_venta_id_seq'), 5, 22.00, 9, 8),
-
-    (nextval('detalle_venta_id_seq'), 2, 18.00, 10, 9),
-    (nextval('detalle_venta_id_seq'), 3, 12.00, 11, 9),
-    (nextval('detalle_venta_id_seq'), 1, 30.00, 12, 9),
-    (nextval('detalle_venta_id_seq'), 2, 25.00, 13, 9),
-
-    (nextval('detalle_venta_id_seq'), 3, 22.00, 14, 10),
-    (nextval('detalle_venta_id_seq'), 1, 25.00, 15, 10),
-    (nextval('detalle_venta_id_seq'), 4, 18.00, 16, 10),
-    (nextval('detalle_venta_id_seq'), 2, 12.50, 17, 10);
+    (nextval('detalle_venta_id_detalle_seq'), 3, 15.00, 2, 1),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 20.50, 3, 1),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 10.00, 4, 1),
+    (nextval('detalle_venta_id_detalle_seq'), 5, 30.00, 5, 1),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 15.00, 6, 2),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 25.00, 7, 2),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 18.50, 8, 2),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 22.50, 9, 2),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 14.00, 10, 3),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 20.00, 11, 3),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 25.00, 12, 3),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 18.50, 13, 3),
+    (nextval('detalle_venta_id_detalle_seq'), 5, 12.00, 14, 4),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 28.00, 15, 4),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 19.00, 16, 4),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 30.00, 17, 4),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 18.50, 18, 5),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 25.00, 19, 5),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 22.00, 20, 5),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 15.00, 21, 5),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 17.50, 22, 6),
+    (nextval('detalle_venta_id_detalle_seq'), 5, 12.50, 23, 6),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 19.00, 24, 6),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 14.00, 25, 6),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 21.50, 2, 7),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 30.00, 3, 7),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 25.50, 4, 7),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 18.00, 5, 7),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 20.00, 6, 8),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 28.00, 7, 8),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 16.50, 8, 8),
+    (nextval('detalle_venta_id_detalle_seq'), 5, 22.00, 9, 8),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 18.00, 10, 9),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 12.00, 11, 9),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 30.00, 12, 9),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 25.00, 13, 9),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 22.00, 14, 10),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 25.00, 15, 10),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 18.00, 16, 10),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 12.50, 17, 10);
