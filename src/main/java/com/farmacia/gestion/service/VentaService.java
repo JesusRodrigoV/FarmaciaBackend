@@ -16,7 +16,6 @@ import com.farmacia.gestion.repository.HistorialVentaRepository;
 import com.farmacia.gestion.repository.ProductoRepository;
 import com.farmacia.gestion.repository.VentaRepository;
 
-
 @Service
 public class VentaService {
     @Autowired
@@ -25,7 +24,7 @@ public class VentaService {
     private ProductoRepository productoRepository;
     @Autowired
     private HistorialVentaRepository historialVentaRepository;
-    
+
     @Autowired
     private DetalleVentaRepository detalleVentaRepository;
 
@@ -72,14 +71,13 @@ public class VentaService {
     public Venta registrarVenta(Venta venta) {
         venta.calcularTotal();
         List<DetalleVenta> detalles = venta.getDetalles();
-        for (DetalleVenta detalle : detalles){
+        for (DetalleVenta detalle : detalles) {
             Producto producto = detalle.producto;
-            if (detalle.producto.getStock() <= detalle.producto.getPuntoReorden()) {
-                calcularPuntoReorden(producto, producto.getTiempoEntrega(), producto.getStockSeguridad());
-            }
+            int nuevoStock = producto.getStock() - detalle.getCantidad();
+            calcularPuntoReorden(producto, producto.getTiempoEntrega(), producto.getStockSeguridad());
+            productoRepository.save(producto);
         }
-        
-        
+
         return ventaRepository.save(venta);
     }
 
@@ -89,7 +87,13 @@ public class VentaService {
 
     private void calcularPuntoReorden(Producto producto, double tiempoEntrega, double stockSeguridad) {
         double demandaDiaria = obtenerDemandaAnualReal(producto.getId()) / 365;
+        System.out.println("\n\n\n\nLa demanda diaria: "+demandaDiaria);
         int puntoReorden = (int) Math.ceil((demandaDiaria * tiempoEntrega) + stockSeguridad);
+        System.out.println("\\n" + //
+                        "\\n" + //
+                        "\\n" + //
+                        "\\n" + //
+                        "El punto de reorden: "+puntoReorden);
         producto.setPuntoReorden(puntoReorden);
     }
 

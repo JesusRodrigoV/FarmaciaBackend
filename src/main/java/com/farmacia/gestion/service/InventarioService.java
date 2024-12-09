@@ -20,14 +20,11 @@ public class InventarioService {
     private ProductoRepository productoRepository;
 
     public Producto calcularEOQ(Producto producto, double costoPedido, double costoAlmacenamiento) {
+        System.out.println("Empezando EOQ");
         double demandaAnual = obtenerDemandaAnualReal(producto.getId());
         double eoq = Math.sqrt((2 * demandaAnual * costoPedido) / costoAlmacenamiento);
-
         producto.setEoq((int) Math.ceil(eoq));
-
-        int puntoReorden = (int) (demandaAnual / 365) * 7; // Ejemplo: demanda semanal
-        producto.setPuntoReorden(puntoReorden);
-
+        calcularPuntoReorden(producto, producto.getTiempoEntrega(), producto.getStockSeguridad());
         return productoRepository.save(producto);
     }
 
@@ -39,8 +36,18 @@ public class InventarioService {
         return ventas.stream().mapToDouble(HistorialVenta::getCantidadVendida).sum();
     }
 
-    public double calcularPuntoReorden(double demandaDiaria, double tiempoEntrega, double stockActual) {
-        return (demandaDiaria * tiempoEntrega) + stockActual;
+    private void calcularPuntoReorden(Producto producto, double tiempoEntrega, double stockSeguridad) {
+        double demandaDiaria = obtenerDemandaAnualReal(producto.getId()) / 365;
+        System.out.println("\n\n\n\nLa demanda diaria: "+demandaDiaria);
+        int puntoReorden = (int) Math.ceil((demandaDiaria * tiempoEntrega) + stockSeguridad);
+        System.out.println("\\n" + //
+                        "\\n" + //
+                        "\\n" + //
+                        "\\n" + //
+                        "El punto de reorden: "+puntoReorden);
+        producto.setPuntoReorden(puntoReorden);
     }
+
+    
 
 }
