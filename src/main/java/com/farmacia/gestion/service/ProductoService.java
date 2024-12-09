@@ -11,12 +11,12 @@ import com.farmacia.gestion.repository.ProductoRepository;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import java.util.List;
 import java.util.Map;
 import com.farmacia.gestion.model.Producto;
 
 @Service
 public class ProductoService {
+
     @Autowired
     private ProductoRepository productoRepository;
 

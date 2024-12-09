@@ -131,7 +131,6 @@ public class Producto {
 }
      */
 
-
 //Nuevo Producto mejor
 
 package com.farmacia.gestion.model;
@@ -181,9 +180,14 @@ public class Producto {
 
     @Column(nullable = false)
     private String formaFarmaceutica; // Forma farmacéutica
-
+    /*
+     * @Column(nullable = false)
+     * private String cantidadPresentacion; // Cantidad y presentación
+     */
     @Column(nullable = false)
-    private String cantidadPresentacion; // Cantidad y presentación
+    private Integer puntoReorden;
+    @Column(nullable = false)
+    private Integer eoq; // Cantidad económica de pedido
 
     public Producto(String nombre, String descripcion, Integer stock, Date fechaVencimiento, Double precio,
             String categoria, String laboratorio, String numeroLote, Date fechaFabricacion, String formaFarmaceutica,
@@ -199,7 +203,7 @@ public class Producto {
         this.numeroLote = numeroLote;
         this.fechaFabricacion = fechaFabricacion;
         this.formaFarmaceutica = formaFarmaceutica;
-        this.cantidadPresentacion = cantidadPresentacion;
+        // this.cantidadPresentacion = cantidadPresentacion;
     }
 
     public Producto() {
@@ -229,16 +233,15 @@ public class Producto {
     public void setFormaFarmaceutica(String formaFarmaceutica) {
         this.formaFarmaceutica = formaFarmaceutica;
     }
-
-    public String getCantidadPresentacion() {
-        return cantidadPresentacion;
-    }
-
-    public void setCantidadPresentacion(String cantidadPresentacion) {
-        this.cantidadPresentacion = cantidadPresentacion;
-    }
-
-    // Resto de getters y setters existentes
+    /*
+     * public String getCantidadPresentacion() {
+     * return cantidadPresentacion;
+     * }
+     * 
+     * public void setCantidadPresentacion(String cantidadPresentacion) {
+     * this.cantidadPresentacion = cantidadPresentacion;
+     * }
+     */
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
@@ -246,6 +249,22 @@ public class Producto {
 
     public void setLaboratorio(String laboratorio) {
         this.laboratorio = laboratorio;
+    }
+
+    public void setEoq(Integer eoq) {
+        this.eoq = eoq;
+    }
+
+    public void setPuntoReorden(Integer puntoReorden) {
+        this.puntoReorden = puntoReorden;
+    }
+
+    public Integer getEoq() {
+        return eoq;
+    }
+
+    public Integer getPuntoReorden() {
+        return puntoReorden;
     }
 
     public String getCategoria() {
@@ -304,6 +323,3 @@ public class Producto {
         return nombre;
     }
 }
-
-
- 

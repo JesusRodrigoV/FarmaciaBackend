@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+import com.farmacia.gestion.service.HistorialVentaService;
+import com.farmacia.gestion.service.InventarioService;
 import com.farmacia.gestion.service.ProductoService;
 
 import com.farmacia.gestion.model.Producto;
@@ -28,6 +30,10 @@ public class ProductoREST {
 
     @Autowired
     private ProductoService productoService;
+    @Autowired
+    private InventarioService inventarioService;
+    @Autowired
+    private HistorialVentaService historialVentaService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Producto>> getAllProducto() {
@@ -67,6 +73,22 @@ public class ProductoREST {
     @PostMapping
     public Producto crearProducto(@RequestBody Producto producto) {
         return productoService.crearProducto(producto);
+    }
+
+    @PostMapping("/calcular-inventario")
+    public ResponseEntity<Producto> calcularInventario(@RequestParam Long id,
+            @RequestParam double costoPedido,
+            @RequestParam double costoAlmacenamiento) {
+        Producto producto = productoService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        Producto actualizado = inventarioService.calcularEOQ(producto, costoPedido, costoAlmacenamiento);
+        return ResponseEntity.ok(actualizado);
+    }
+
+    @GetMapping("/predicciones/{idProducto}")
+    public ResponseEntity<double[][]> obtenerPredicciones(@PathVariable Long idProducto) {
+        double[][] matrizTransicion = historialVentaService.calcularMatrizTransicion(idProducto);
+        return ResponseEntity.ok(matrizTransicion);
     }
 
     @DeleteMapping("/{id}")
