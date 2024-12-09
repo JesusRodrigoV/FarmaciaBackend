@@ -201,3 +201,65 @@ VALUES
     (nextval('detalle_venta_id_detalle_seq'), 1, 25.00, 15, 10),
     (nextval('detalle_venta_id_detalle_seq'), 4, 18.00, 16, 10),
     (nextval('detalle_venta_id_detalle_seq'), 2, 12.50, 17, 10);
+
+select * from venta;
+
+INSERT INTO venta (id_venta, fecha_venta, id_cliente, metodo_pago, total) 
+VALUES
+    (nextval('venta_id_venta_seq'), '2023-01-15', 1, 'Transferencia', 150.00),
+    (nextval('venta_id_venta_seq'), '2023-02-10', 2, 'Efectivo', 180.00),
+    (nextval('venta_id_venta_seq'), '2023-03-22', 3, 'Tarjeta', 210.00),
+    (nextval('venta_id_venta_seq'), '2023-04-17', 4, 'Transferencia', 250.00),
+    (nextval('venta_id_venta_seq'), '2023-05-25', 1, 'Tarjeta', 300.00),
+    (nextval('venta_id_venta_seq'), '2023-06-05', 2, 'Efectivo', 280.00),
+    (nextval('venta_id_venta_seq'), '2023-07-13', 3, 'Transferencia', 230.00),
+    (nextval('venta_id_venta_seq'), '2023-08-09', 4, 'Efectivo', 320.00),
+    (nextval('venta_id_venta_seq'), '2023-09-15', 1, 'Tarjeta', 340.00),
+    (nextval('venta_id_venta_seq'), '2023-10-10', 2, 'Transferencia', 270.00),
+    (nextval('venta_id_venta_seq'), '2023-11-20', 3, 'Efectivo', 260.00),
+    (nextval('venta_id_venta_seq'), '2023-12-30', 4, 'Tarjeta', 380.00),
+    (nextval('venta_id_venta_seq'), '2024-01-05', 1, 'Efectivo', 300.00),
+    (nextval('venta_id_venta_seq'), '2024-02-15', 2, 'Tarjeta', 230.00),
+    (nextval('venta_id_venta_seq'), '2024-03-08', 3, 'Transferencia', 190.00),
+    (nextval('venta_id_venta_seq'), '2024-04-20', 4, 'Efectivo', 350.00),
+    (nextval('venta_id_venta_seq'), '2024-05-02', 1, 'Tarjeta', 400.00),
+    (nextval('venta_id_venta_seq'), '2024-06-10', 2, 'Transferencia', 280.00),
+    (nextval('venta_id_venta_seq'), '2024-07-13', 3, 'Efectivo', 250.00),
+    (nextval('venta_id_venta_seq'), '2024-08-25', 4, 'Tarjeta', 310.00),
+    (nextval('venta_id_venta_seq'), '2024-09-15', 1, 'Transferencia', 420.00),
+    (nextval('venta_id_venta_seq'), '2024-10-22', 2, 'Efectivo', 230.00),
+    (nextval('venta_id_venta_seq'), '2024-11-05', 3, 'Tarjeta', 350.00),
+    (nextval('venta_id_venta_seq'), '2024-12-01', 4, 'Transferencia', 380.00);
+
+INSERT INTO detalle_venta (id_detalle, cantidad, precio_unitario, id_producto, id_venta)
+VALUES
+    (nextval('detalle_venta_id_detalle_seq'), 3, 15.00, 2, 25),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 20.50, 3, 26),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 10.00, 4, 27),
+    (nextval('detalle_venta_id_detalle_seq'), 5, 30.00, 5, 28),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 15.00, 6, 29),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 25.00, 7, 30),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 18.50, 8, 31),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 22.50, 9, 32),
+
+    (nextval('detalle_venta_id_detalle_seq'), 2, 21.50, 18, 25),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 30.00, 18, 26),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 25.50, 18, 27),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 18.00, 18, 28),
+
+    (nextval('detalle_venta_id_detalle_seq'), 3, 20.00, 6, 33),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 28.00, 7, 34),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 16.50, 8, 35),
+    (nextval('detalle_venta_id_detalle_seq'), 5, 22.00, 9, 36),
+
+    (nextval('detalle_venta_id_detalle_seq'), 2, 18.00, 18, 37),
+    (nextval('detalle_venta_id_detalle_seq'), 3, 12.00, 18, 38),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 30.00, 18, 39),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 25.00, 18, 40),
+
+    (nextval('detalle_venta_id_detalle_seq'), 3, 22.00, 18, 41),
+    (nextval('detalle_venta_id_detalle_seq'), 1, 25.00, 18, 42),
+    (nextval('detalle_venta_id_detalle_seq'), 4, 18.00, 18, 43),
+    (nextval('detalle_venta_id_detalle_seq'), 2, 12.50, 18, 44);
+
+
