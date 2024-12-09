@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "receta_medica")
 public class RecetaMedica {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_receta")
     private int id;
     @Column(nullable = false)
