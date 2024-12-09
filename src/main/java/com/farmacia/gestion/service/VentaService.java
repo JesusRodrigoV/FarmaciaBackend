@@ -73,7 +73,6 @@ public class VentaService {
         List<DetalleVenta> detalles = venta.getDetalles();
         for (DetalleVenta detalle : detalles) {
             Producto producto = detalle.producto;
-            int nuevoStock = producto.getStock() - detalle.getCantidad();
             calcularPuntoReorden(producto, producto.getTiempoEntrega(), producto.getStockSeguridad());
             productoRepository.save(producto);
         }
