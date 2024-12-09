@@ -1,7 +1,6 @@
 package com.farmacia.gestion.service;
 
 import com.farmacia.gestion.model.Categoria;
-import com.farmacia.gestion.model.Cliente;
 import com.farmacia.gestion.repository.CategoriaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
