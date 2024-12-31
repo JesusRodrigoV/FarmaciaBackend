@@ -1,36 +1,43 @@
 package com.farmacia.gestion.model;
 
+import java.sql.Timestamp;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private int id;
-    @Column(nullable = false, unique = true)
-    private String name;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
-    private String rol;
+    private Long id;
 
-    public Usuario(String name, String password, String rol) {
-        super();
-        this.name = name;
+    @Column(name = "usuario", nullable = false, length = 255)
+    private String usuario;
+
+    @Column(name = "password", nullable = false, length = 255)
+    private String password;
+
+    @Column(name = "fecha_registro", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp fecha_registro;
+
+    @OneToOne
+    @JoinColumn(name = "id_rol")
+    private Rol rol;
+
+    public Usuario(String usuario, String password, Timestamp fecha_registro, Rol rol) {
+        this.usuario = usuario;
         this.password = password;
+        this.fecha_registro = fecha_registro;
         this.rol = rol;
+
     }
 
     public Usuario() {
     }
 
-    public void setEmail(String name) {
-        this.name = name;
-    }
-
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,15 +45,19 @@ public class Usuario {
         this.password = password;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
-    public String getName() {
-        return name;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public int getId() {
+    public Timestamp getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public Long getId() {
         return id;
     }
 
@@ -54,7 +65,12 @@ public class Usuario {
         return password;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
 }

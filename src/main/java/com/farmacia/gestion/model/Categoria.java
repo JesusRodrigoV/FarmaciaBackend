@@ -1,35 +1,61 @@
 package com.farmacia.gestion.model;
 
 import jakarta.persistence.*;
+import java.sql.Timestamp;
+
+/*
+ * Tabla Categorias
+ */
 
 @Entity
-@Table(name = "categoria")
+@Table(name = "categorias")
 public class Categoria {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String nombre;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id_categoria")
+  private String id;
 
-    public Categoria(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
+  @Column(name = "nombre", nullable = false, length = 50)
+  private String nombre;
 
-    public Categoria() {
-    }
+  @Column(name = "descripcion", nullable = false, length = 100)
+  private String descripcion;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public Long getId() {
-        return id;
-    }
-    public String getNombre() {
-        return nombre;
-    }
+  @Column(name = "fecha_registro", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+  private Timestamp fecha_registro;
+
+  public Categoria(String nombre, String descripcion, Timestamp fecha_registro) {
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.fecha_registro = fecha_registro;
+  }
+
+  public Categoria() {
+  }
+
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
+
+
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
+  public String getDescripcion() {
+    return descripcion;
+  }
+
+  public Timestamp getFecha_registro() {
+    return fecha_registro;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getNombre() {
+    return nombre;
+  }
 }
