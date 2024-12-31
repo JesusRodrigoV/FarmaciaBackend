@@ -9,7 +9,7 @@ public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_rol")
-    private Long id;
+    private byte id;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
@@ -25,7 +25,7 @@ public class Rol {
         this.nombre = nombre;
     }
 
-    public Long getId() {
+    public byte getId() {
         return id;
     }
 

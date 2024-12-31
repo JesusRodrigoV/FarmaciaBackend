@@ -11,7 +11,7 @@ public class Laboratorio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_laboratorio")
-    private Long id;
+    private short id;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
@@ -49,11 +49,7 @@ public class Laboratorio {
         this.estado = estado;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
-    }
-
-    public void setId(Long id) {
+    public void setId(short id) {
         this.id = id;
     }
 
@@ -77,7 +73,7 @@ public class Laboratorio {
         return fecha_registro;
     }
 
-    public Long getId() {
+    public short getId() {
         return id;
     }
 

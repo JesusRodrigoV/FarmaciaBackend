@@ -11,7 +11,7 @@ public class FormasFarmaceuticas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_forma")
-    private Long id;
+    private short id;
 
     @Column(name = "nombre", nullable = false, length = 25)
     private String nombre;
@@ -31,7 +31,7 @@ public class FormasFarmaceuticas {
     public FormasFarmaceuticas() {
     }
 
-    public void setId(Long id) {
+    public void setId(short id) {
         this.id = id;
     }
 
@@ -51,7 +51,7 @@ public class FormasFarmaceuticas {
         return fecha_registro;
     }
 
-    public Long getId() {
+    public short getId() {
         return id;
     }
 

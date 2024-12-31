@@ -14,7 +14,7 @@ public class Estado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estado")
-    private Long id;
+    private byte id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "descripcion", nullable = false, length = 15)
@@ -31,7 +31,7 @@ public class Estado {
         this.descripcion = descripcion;
     }
 
-    public void setId(Long id) {
+    public void setId(byte id) {
         this.id = id;
     }
 
@@ -39,7 +39,7 @@ public class Estado {
         return descripcion;
     }
 
-    public Long getId() {
+    public byte getId() {
         return id;
     }
 

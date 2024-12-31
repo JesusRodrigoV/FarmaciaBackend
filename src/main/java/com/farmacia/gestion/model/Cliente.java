@@ -47,10 +47,6 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }

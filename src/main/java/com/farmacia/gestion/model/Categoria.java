@@ -14,7 +14,7 @@ public class Categoria {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_categoria")
-  private String id;
+  private int id;
 
   @Column(name = "nombre", nullable = false, length = 50)
   private String nombre;
@@ -34,10 +34,13 @@ public class Categoria {
   public Categoria() {
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
   public void setDescripcion(String descripcion) {
     this.descripcion = descripcion;
   }
-
 
   public void setNombre(String nombre) {
     this.nombre = nombre;
@@ -51,7 +54,7 @@ public class Categoria {
     return fecha_registro;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
